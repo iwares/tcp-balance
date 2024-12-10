@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ts-node",
+      "type": "node",
+      "request": "launch",
+      "args": [
+        "src/index.ts",
+        "-b",
+        ":3721",
+        "-a",
+        "single",
+        "127.0.0.1:1883",
+        "127.0.0.1:1884"
+      ],
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "cwd": "${workspaceRoot}"
+    }
+  ]
+}

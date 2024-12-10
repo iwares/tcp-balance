@@ -1,0 +1,40 @@
+{
+  "name": "tcp-balance",
+  "version": "1.0.0",
+  "description": "A server that provides load balancing function for TCP connections.",
+  "main": "bin/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "tcp-balance": "./bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwares/tcp-balance.git"
+  },
+  "keywords": [
+    "tcp",
+    "load",
+    "balancer"
+  ],
+  "files": [
+    "bin"
+  ],
+  "author": "Eric.Tsai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iwares/tcp-balance/issues"
+  },
+  "homepage": "https://github.com/iwares/tcp-balance#readme",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/yargs": "^17.0.33",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
