@@ -146,7 +146,7 @@ export class RobinBalancer extends Balancer {
 
     for (let i = 0; i < this.upstreams.length; ++i) {
       const upstream = this.upstreams[this.index++ % this.upstreams.length];
-      if (upstream.alive)
+      if (!upstream.alive)
         continue;
 
       Logger.log(`Trying upstream ${upstream.host}:${upstream.port} ...`);
