@@ -7,6 +7,7 @@ export class Agent {
 
   private readonly balancer: Balancer;
   private server?: Server;
+  private readonly connections: Set<Connection> = new Set();
 
   public constructor(balancer: Balancer) {
     this.balancer = balancer;
@@ -27,6 +28,8 @@ export class Agent {
       if (!this.server)
         return reject(new Error('Agent not started'));
       Logger.log('Agent is stopping');
+      for (const connection of this.connections)
+        connection.close();
       this.server.close(error => error ? reject(error) : resolve());
       this.server = undefined;
     })
@@ -41,6 +44,8 @@ export class Agent {
       return connection.close();
 
     Logger.log(`Forwarding connection #${connection.id} to ${remote.remoteAddress}:${remote.remotePort}`);
+    this.connections.add(connection);
+    socket.on('close', () => this.connections.delete(connection));
     connection.bridge(remote);
   }
 

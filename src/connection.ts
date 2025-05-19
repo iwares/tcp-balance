@@ -18,6 +18,7 @@ export class Connection {
 
     this.client = client;
 
+    client.on('error', this.close.bind(this));
     client.on('data', (msg: string) => {
       if (!this.server)
         return this.buffers.push(Buffer.from(msg));
@@ -28,9 +29,10 @@ export class Connection {
   public bridge(server: Socket) {
     this.server = server;
 
+    server.on('error', this.close.bind(this));
     server.on('data', (msg: string) => this.client.write(msg));
-    server.on('close', () => this.client.end());
-    this.client.on('close', () => this.server?.end());
+    server.on('close', this.close.bind(this));
+    this.client.on('close', this.close.bind(this));
 
     for (let buffer of this.buffers)
       server.write(buffer);
